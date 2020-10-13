@@ -1,0 +1,12 @@
+//Draw Polylines within Rad;
+
+int nearpnts[] = nearpoints(0, @P, chf("Radius"));
+
+foreach(int pnt; nearpnts){
+    
+    if(pnt != @ptnum){
+        int line  = addprim(0, "polyline");
+        addvertex(0, line, @ptnum);
+        addvertex(0, line, pnt);
+        }
+    }

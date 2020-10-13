@@ -1,0 +1,130 @@
+//Maya Preference 2018 (Release 1)
+//
+//
+
+//
+// The runtime commands referenced by the hotkeys
+//
+//
+// The name commands referenced by the hotkeys
+//
+nameCommand
+	-annotation "SplitEdgeRingToolNameCommand"
+	-sourceType "mel"
+	-command ("SplitEdgeRingTool")
+	SplitEdgeRingToolNameCommand;
+
+nameCommand
+	-annotation "BevelPolygonNameCommand"
+	-sourceType "mel"
+	-command ("BevelPolygon")
+	BevelPolygonNameCommand;
+
+nameCommand
+	-annotation "dR_multiCutToolNameCommand"
+	-sourceType "mel"
+	-command ("dR_multiCutTool")
+	dR_multiCutToolNameCommand;
+
+nameCommand
+	-annotation "FillHoleNameCommand"
+	-sourceType "mel"
+	-command ("FillHole")
+	FillHoleNameCommand;
+
+nameCommand
+	-annotation "SmoothPolygonNameCommand"
+	-sourceType "mel"
+	-command ("SmoothPolygon")
+	SmoothPolygonNameCommand;
+
+nameCommand
+	-annotation "PolyMergeNameCommand"
+	-sourceType "mel"
+	-command ("PolyMerge")
+	PolyMergeNameCommand;
+
+nameCommand
+	-annotation "PolyEditEdgeFlowNameCommand"
+	-sourceType "mel"
+	-command ("PolyEditEdgeFlow")
+	PolyEditEdgeFlowNameCommand;
+
+nameCommand
+	-annotation "PolyCreaseToolNameCommand"
+	-sourceType "mel"
+	-command ("PolyCreaseTool")
+	PolyCreaseToolNameCommand;
+
+nameCommand
+	-annotation "BridgeEdgeOptionsNameCommand"
+	-sourceType "mel"
+	-command ("BridgeEdgeOptions")
+	BridgeEdgeOptionsNameCommand;
+
+nameCommand
+	-annotation "ExtractFaceNameCommand"
+	-sourceType "mel"
+	-command ("ExtractFace")
+	ExtractFaceNameCommand;
+
+nameCommand
+	-annotation "DetachComponentNameCommand"
+	-sourceType "mel"
+	-command ("DetachComponent")
+	DetachComponentNameCommand;
+
+nameCommand
+	-annotation "MergeVertexToolNameCommand"
+	-sourceType "mel"
+	-command ("MergeVertexTool")
+	MergeVertexToolNameCommand;
+
+//
+// The user hotkeys
+//
+//
+// The hotkey set
+//
+hotkeySet -source "Maya_Default" -current maya_egmontas_v1;
+//
+// The hotkey contexts and hotkeys
+//
+hotkey -keyShortcut "b" -ctl -name ("FillHoleNameCommand");
+hotkey -keyShortcut "w" -ctl -sht -name ("PolyEditEdgeFlowNameCommand");
+hotkey -keyShortcut "q" -ctl -sht -name ("PolyMergeNameCommand");
+hotkey -keyShortcut "e" -alt -name ("ExtractFaceNameCommand");
+hotkey -keyShortcut "r" -alt -name ("DetachComponentNameCommand");
+hotkey -keyShortcut "w" -ctl -name ("");
+hotkey -keyShortcut "/" -ctl -name ("");
+hotkey -keyShortcut "t" -alt -name ("MergeVertexToolNameCommand");
+hotkey -keyShortcut "q" -ctl -name ("SplitEdgeRingToolNameCommand");
+hotkey -keyShortcut "3" -ctl -name ("");
+hotkey -keyShortcut "t" -ctl -name ("SmoothPolygonNameCommand");
+hotkey -keyShortcut "<" -name ("");
+hotkey -keyShortcut "2" -ctl -name ("ShrinkPolygonSelectionRegionNameCommand");
+hotkey -keyShortcut "1" -ctl -name ("GrowPolygonSelectionRegionNameCommand");
+hotkey -keyShortcut "q" -alt -releaseName ("");
+hotkey -keyShortcut "q" -alt -name ("BridgeEdgeOptionsNameCommand");
+hotkey -keyShortcut "r" -ctl -name ("dR_multiCutToolNameCommand");
+hotkey -keyShortcut "\\" -ctl -name ("BevelPolygonNameCommand");
+hotkey -keyShortcut "w" -alt -name ("PolyCreaseToolNameCommand");
+hotkey -keyShortcut "x" -ctl -sht -name ("");
+hotkey -keyShortcut ">" -name ("");
+hotkeyCtx -type "Editor" -addClient "posePanel";
+hotkeyCtx -type "Editor" -addClient "profilerPanel";
+hotkeyCtx -type "Editor" -addClient "graphEditor";
+hotkeyCtx -type "Editor" -addClient "outlinerPanel";
+hotkeyCtx -type "Editor" -addClient "nodeEditorPanel";
+hotkeyCtx -type "Editor" -addClient "hyperShadePanel";
+hotkeyCtx -type "Editor" -addClient "polyTexturePlacementPanel";
+hotkeyCtx -type "Editor" -addClient "hyperGraphPanel";
+hotkeyCtx -type "Editor" -addClient "timeEditorPanel";
+hotkeyCtx -type "Editor" -addClient "shapePanel";
+hotkeyCtx -type "Tool" -addClient "xgmIGBrush";
+hotkeyCtx -type "Tool" -addClient "texSculptCacheContext";
+hotkeyCtx -type "Tool" -addClient "texCutContext";
+hotkeyCtx -type "Tool" -addClient "polyCutUV";
+hotkeyCtx -type "Tool" -addClient "SymmetrizeUVBrush";
+hotkeyCtx -type "Tool" -addClient "Unfold3DBrush";
+hotkeyCtx -type "Tool" -addClient "sculptMeshCache";

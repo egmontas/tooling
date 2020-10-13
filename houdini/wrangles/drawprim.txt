@@ -1,0 +1,6 @@
+//wrangle works on first geo stream so this line merges the second input
+int npnt = addpoint(0, @opinput1_P);
+
+int nprim = addprim(0, "polyline");
+addvertex(0, nprim, @ptnum);
+addvertex(0, nprim, npnt);

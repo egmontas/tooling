@@ -1,0 +1,35 @@
+//Draw Polylines within Rad (with Limit of Polylines);
+
+float radius = chf("Radius");
+int nearpnts[] = nearpoints(0, @P, radius);
+float dist[];
+int limit = chi("Limit");
+
+foreach(int pnt; nearpnts){
+    vector vpnt = point(0, "P", pnt);
+    float magvpnt = length(vpnt);
+    push(dist, abs(length(@P) - magvpnt));
+    //f[]@debug1 = dist;
+    i@length = len(dist);
+    }
+
+    int order[] = argsort(dist);
+    float sortdist[] = reorder(dist, order);
+    int sortnear[] = reorder(nearpnts, order); 
+    //f[]@debug2 = order; 
+    //f[]@debug3 = sortnear;
+    //f[]@debug4 = sortdist;
+    f@debug = sortdist[@length-1]; 
+    
+int counter = 0;
+
+foreach(int npnt; sortnear){
+    counter++;
+    if(npnt != @ptnum){
+        if(counter <= limit){
+            int line = addprim(0, "polyline");
+            addvertex(0, line, @ptnum);
+            addvertex(0, line, npnt);
+            }
+        }
+    }

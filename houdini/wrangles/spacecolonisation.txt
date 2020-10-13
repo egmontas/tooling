@@ -1,0 +1,56 @@
+//point wrangle - initialise associates
+
+i[]@associates = array();
+
+//point wrangle - associate
+//runs over group:attractors
+
+float infrad = ch("infrad");
+int nearpnt = nearpoint(0, "nodes", @P, infrad);
+int valarr[] = array(@ptnum);
+
+setpointattrib(0, "associates", nearpnt, valarr, "append");
+
+//point wrangle - expand tree
+//runs over group:nodes
+
+float rad = ch("radius");
+
+//reads attribute as a local variable
+int myassociates[] = i[]@associates;
+
+//test for point with associates
+//creates a point at a normalised distance away in the average direction of nearpoints
+//moves that point into nodes group, optional set colour
+//draws a primitive
+if(len(myassociates) > 0){
+    vector sum = {0,0,0};
+    foreach(int node; myassociates){
+        vector nodepos = point(0, "P", node);
+        vector dir = normalize(nodepos - @P);
+        sum += dir;
+        }
+        sum = normalize(sum);
+        
+        int newnode = addpoint(0, @P+sum*rad);
+        setpointgroup(0, "nodes", newnode, 1, "set");
+        setpointattrib(0, "Cd", newnode, chv("colour"), "set");
+        
+        int nprim = addprim(0, "polyline");
+        addvertex(0, nprim, @ptnum);
+        addvertex(0, nprim, newnode);
+    }
+
+//point wrangle - remove attractors
+//runs over group:nodes
+
+float killrad = ch("kill_radius");
+
+int nearpnts[] = nearpoints(0, "attractors", @P, killrad);
+
+foreach(int pnt; nearpnts){
+    removepoint(0, pnt);
+    }
+
+
+

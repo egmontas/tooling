@@ -1,0 +1,7 @@
+int neighs[] = pointvertices(0,@ptnum);
+i@neighs = len(neighs);
+
+if(len(neighs) <= chf("Edges"))
+    {
+        @group_border=1;
+    }
