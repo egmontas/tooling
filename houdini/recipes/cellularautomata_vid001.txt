@@ -1,0 +1,65 @@
+//Initialise State
+
+@id = @ptnum;
+
+//create state of point and apply a colour debug...
+
+float temp = rand(@id);
+
+float modtemp = chramp("Ramp", temp);
+
+i@state = rint(modtemp);
+
+if(@state == 1){
+	@Cd = set(1,1,1);
+	}
+
+if(@state == 0){
+	@Cd = set(0,0,0);
+	}
+
+//Setup Neighbours
+
+float size = chf("Size");
+int res = chi("Resolution");
+float len = size/(res-1);
+float tol = 0.01;
+
+f@dist = sqrt(2*(len*len)) + tol;
+
+//Programming
+
+//create hope
+int hope = 0;
+
+int npts[] = nearpoints(0, v@P, @dist);
+removeindex(npts, 0);
+i[]@debug = npts;
+
+//unnecessary but occasionally useful...
+int count = len(npts);
+i@count = count;
+
+foreach(int npt; npts){
+	hope += point(0, "state", npt);
+	i@hope = hope;
+	}
+
+//dies from loneliness
+if(@state == 1 && hope < 2){
+	@state = 0;
+	@Cd = set(0,0,0);
+	}
+//dies from overpopulation
+if(@state == 1 && @hope > 3){
+	@state = 0;
+	@Cd = set(0,0,0);
+	}
+
+//birth
+if(@state == 0 && @hope == 3){
+	@state = 1;
+	@Cd = set(1,1,1);
+	}
+	
+//stasis - simply doesn't fall into test
