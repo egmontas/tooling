@@ -1,0 +1,192 @@
+//*Initialise Sun - cloud input0; sunPoint input1
+
+vector sunpos = point(1, "P", 0);
+vector sundir = sunpos - @P;
+//debug
+//@N = sundir;
+
+f@magnitude = length(sundir);
+
+//*minmax Magnitude
+
+setdetailattrib(0, "maxmag", @magnitude, "max");
+setdetailattrib(0, "minmag", @magnitude, "min");
+
+//*Fit Magnitude
+
+float min = detail(0, "minmag", 0);
+float max = detail(0, "maxmag", 0);
+
+@magnitude = fit(@magnitude, min, max, 1, 0);
+
+//*Initialise State w. Sun
+
+@id = @ptnum;
+
+//create state of automaton and give colour debug...
+
+//here the seed is random but...
+//multiplied by a 0-1 magnitude...
+
+f@seed = 2*@magnitude * rand(@id);
+
+i@state = int(rint(@seed));
+
+@death = chf("Death");
+
+if(@state == 1){
+    @Cd = set(1, 1, 1);
+    //lifetime has to be initialised
+    f@incept = rand(@seed);
+    @incept = fit(@incept, 0, 1, 0, @death);
+    @lTime = @incept;
+    }
+    
+if(@state == 0){
+    @Cd = set(0, 0, 0);
+    @incept = 0;
+    }
+	
+//*Setup Neighbours
+
+float size = chf("Size");
+int res = chi("Resolution");
+float tol = size/res/5; 
+float reso = 0.1;
+
+f@dist = reso + tol;
+
+//***Solver IN
+
+//*Programming P1
+
+//create hope
+int hope = 0;
+
+int npts[] = nearpoints(0, v@P, @dist);
+removeindex(npts, 0);
+i[]@debug = npts;
+int count = len(npts);
+i@count = count;
+
+foreach(int npt; npts){
+    hope += point(0, "state", npt);
+    i@hope = hope;
+	}
+	
+//*Sun - cloud input0; sunPoint input1;
+
+vector sunpos = point(1, "P", 0);
+vector sundir = sunpos - @P;
+
+@temperature = length(sundir);
+
+//*minmax Temperature
+
+setdetailattrib(0, "maxtemp", @temperature, "max");
+setdetailattrib(0, "mintemp", @temperature, "min");
+
+//*Fit Temperature
+
+float min = detail(0, "mintemp", 0);
+float max = detail(0, "maxtemp", 0);
+
+@temperature = fit(@temperature, min, max, 1, 0);
+
+//*Programming P2
+
+//---Functions---
+function void life(float @state, @lTime, @Time; vector @Cd){   
+    @state = 1;
+    @Cd = set(1, 1, 1);
+    @lTime = @Time;
+    }
+
+//---Main---
+//insert percentage based rules of life
+
+float lonely = rint(@maxhope * 0.3);
+float crowded = rint(@maxhope * 0.7);
+float birth = rint(@maxhope * 0.6);
+
+float chanceof = rand(@id);
+@chance = chanceof * @temperature;
+
+//dies from loneliness
+if(@state == 1 && @hope < lonely){
+    @state = 0;
+    @Cd = set(0, 0, 0);
+    @dTime = @Time;
+    @lTime = 0;
+    @age = 0;
+    }
+//dies from overpopulation    
+if(@state == 1 && @hope > crowded){
+    @state = 0;
+    @Cd = set(0, 0, 0);
+    @dTime = @Time;
+    @lTime = 0;
+    @age = 0;
+    }
+//birth    
+if(@state == 0 && @hope == birth){
+    life(@state, @lTime, @Time, @Cd);
+    }
+    
+//informed by sun & chance
+if(@state == 0 && @chance >= 0.5){
+    life(@state, @lTime, @Time, @Cd);
+    }
+    
+//stasis - simply doesn't fall into test
+
+//*Programming P3
+
+//let's naturally test for time
+if(@state == 1){
+    @age = 2*@incept + (@Time - @lTime);    
+    }
+
+if(@state == 1 && @age >= @death){
+    @state = 0;
+    @Cd = set(0, 0, 0);
+    @dTime = @Time;
+    @lTime = 0;
+    }
+    
+if(@state == 0){
+    @age = 0;
+    @incept = 0;
+    }
+	
+//***Solver OUT
+
+//*Dead or Alive
+
+if(@state == 0){
+    setpointgroup(0, "dead", @ptnum, 1);
+    }
+    
+if(@state == 1){
+    setpointgroup(0, "alive", @ptnum, 1);
+    }
+
+float young = lerp(0, @death, 0.3);
+float old =  lerp(0, @death, 0.7);
+
+float age[] = array(0, young, old, @death);
+f[]@test = age;
+
+if(@age <= age[1] && @age != 0){
+    setpointgroup(0, "young", @ptnum, 1);
+    }
+
+if(@age >= age[2]){
+    setpointgroup(0, "old", @ptnum, 1);
+    }
+    
+if(@age > age[1] && @age < age[2]){
+    setpointgroup(0, "adult", @ptnum, 1);
+    }
+	
+//End
