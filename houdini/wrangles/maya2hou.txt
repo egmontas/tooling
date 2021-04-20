@@ -1,0 +1,16 @@
+//clean material names to match input strings
+
+int num = len(@shop_materialpath);
+
+s@mat = slice(s@shop_materialpath, 5, num);
+
+//type out shader names separated by 'space'
+
+string shaders[] = split(chs("Shaders"));
+s[]@debug = shaders;
+
+foreach(string shader; shaders){
+    if(s@mat == shader){
+        setprimgroup(0, shader, @primnum, 1);
+        }
+    }
