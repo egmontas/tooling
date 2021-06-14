@@ -1,0 +1,3 @@
+//input 0 is cache; input 1 is cache timeshift frozen on frame 1;
+
+v@uv = vertex(1, "uv", @vtxnum);

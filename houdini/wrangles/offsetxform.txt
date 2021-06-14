@@ -1,0 +1,7 @@
+//without chops
+//matrix xform = detail(1, "xform");
+
+//with chops
+matrix xform = point(1, "xform", 0);
+xform = invert(xform);
+v@P *= xform;
