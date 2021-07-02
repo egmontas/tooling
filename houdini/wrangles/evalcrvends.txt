@@ -1,0 +1,15 @@
+//group the end points
+
+if(@curveu == 0.0 || @curveu == 1.0){
+    setpointgroup(0, "ends", @ptnum, 1);
+    }
+
+//separate start and end points
+
+if(@curveu == 0.0){
+    setpointgroup(0, "crv0", @ptnum, 1);
+    }
+    
+if(@curveu == 1.0){
+    setpointgroup(0, "crv1", @ptnum, 1);
+    }
