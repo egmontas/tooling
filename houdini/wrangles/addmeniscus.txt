@@ -1,0 +1,14 @@
+float dist = volumesample(1, 0, @P);
+
+//remap inside and outside
+float mask = 1 - fit(dist, ch("min"), ch("max"), 0, 1);
+mask *= 1 - fit(-dist, ch("min"), ch("max"), 0, 1);
+
+//radial profile
+mask *= mask;
+
+//transform sample location
+vector pos = @P;
+pos.y -= ch("scale") * mask;
+
+@surface = volumesample(0, 0, pos);
