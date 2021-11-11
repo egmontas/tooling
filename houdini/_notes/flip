@@ -1,0 +1,33 @@
+Flip
+
+Volume Loss
+
+flipobject:
+
+    properties
+        the mass of particles is volume*density therefore changing particle separation will change particle mass
+        grid scale - if grid scale goes below a threshold, new particles are spawned (a kind of over-compensated-sampling)
+        
+    creation
+
+    initial data
+        sop path
+        initialise velocity, viscosity & temp
+    guides
+        particles - set to particles not sprites
+        collision - true collision resolution that the simulation sees
+    physical
+    collisions
+
+flipsolver:
+
+    substeps
+
+    particle motion
+    volume motion
+        velocity transfer - splash for water, swirly for art directing fluids
+        volume limits - adjust bounding box
+        collisions - 
+    narrow band
+    distribution
+    

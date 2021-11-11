@@ -1,0 +1,14 @@
+//unpin at a particular Frame
+
+//for a permanent pin
+//work with geometry wrangle
+
+if(@Frame > 25){
+    i@stopped = 0;
+    i@pintoanimation = 0;
+}
+
+//for a soft pin
+//work with vellumconstraintproperty
+
+//select group, activate dop with expression $F>25, select remove=1 
