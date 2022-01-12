@@ -1,0 +1,19 @@
+//popwrangle
+//test pop velocity
+
+float vthreshold = chf("vthreshold");
+if(length(v@v) < vthreshold){
+    //under threshold cumulatively add value...
+    f@slow += 1.0;
+}
+
+//popgroup
+//create group via enabled vexpressions
+
+float slowthreshold = chf("slowthreshold");
+if(f@slow > slowthreshold){
+    ingroup = 1;
+}
+
+//vellumconstraintspin (each frame)
+//pin the group
