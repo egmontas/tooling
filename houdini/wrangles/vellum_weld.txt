@@ -1,0 +1,11 @@
+//@weld is on Geometry
+//@weld = -1 means no weld
+//@weld = int, usually is the @id of the point it is welded to.
+
+//use simple expressions like this, first store the weld ids into an attribute
+
+@weld = -1;
+
+if(@Frame > 5){
+    i@weld = i@weldid;
+}
