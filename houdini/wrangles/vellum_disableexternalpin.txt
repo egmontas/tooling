@@ -1,0 +1,3 @@
+if(@group_pin == 1){
+    i@disableexternal=1;
+    }
