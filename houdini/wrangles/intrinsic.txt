@@ -1,0 +1,8 @@
+examples:
+
+detail intrinsic:pointcount
+detail intrinsic:bounds
+primitive intrinsic:measuredarea
+primitive: intrinsic:memoryusage
+
+https://www.sidefx.com/docs/houdini/model/attributes.html

@@ -1,0 +1,14 @@
+int texture:xres
+int texture:yres
+int texture:channels
+string[] texture:channelnames
+float[] texture:channelsize
+string[] texture:channelstorage
+string[] texture:tokens
+vector texture:resolution
+matrix texture:worldtoview
+matrix texture:projection
+matrix texture:worldtondc
+
+//lists all the possible queries
+string texture:tokens
